@@ -7,10 +7,15 @@ Starting this off with a C# script that blocks IP addresses that were abusive in
 For this to work you need:
 
 -WAF policy (Frontdoor in this example) that sends logs to Sentinel
+
 -Anaytlic rule that creates incidents with IP Entities
+
 -Logic app that sends entities from the Sentinel incident to the function app
+
 -C# code running on a function consumption plan
+
 -Custom WAF Deny rule with the name "BlockedIPs", match type IP address, variable RemoteAddr
+
 -Buy a coffee on buymeacoffee.com/potsolutions
 
 Sentinel Analytic rule:
