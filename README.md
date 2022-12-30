@@ -11,7 +11,7 @@ For this to work you need:
 
 -Logic app that sends entities from the Sentinel incident to the function app
 
--C# code running on a function consumption plan
+-C# code running on a function plan in Azure, you can use Visual Studio Community to deploy it.
 
 -Custom WAF Deny rule with the name "BlockedIPs", match type IP address, variable RemoteAddr
 
