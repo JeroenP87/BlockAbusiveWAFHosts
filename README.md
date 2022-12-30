@@ -54,4 +54,4 @@ With body data:
   }
 ]
 
--Buy a coffee on buymeacoffee.com/potsolutions
+-Buy a coffee on www.buymeacoffee.com/potsolutions
