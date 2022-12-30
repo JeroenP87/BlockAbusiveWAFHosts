@@ -15,10 +15,7 @@ For this to work you need:
 
 -Custom WAF Deny rule with the name "BlockedIPs", match type IP address, variable RemoteAddr
 
--Buy a coffee on buymeacoffee.com/potsolutions
-
--Sentinel Analytic rule:
--run every 1 hour with data of the past 1 day
+-Sentinel Analytic rule, run every 1 hour with data of the past 1 day.
 
 query:
 
@@ -33,4 +30,28 @@ AzureDiagnostics
 | order by RequestCount desc
 
 
-www.buymeacoffee.com/potsolutions
+You can test the functionality with PostMan by sending Post to: FunctionAppURI/api/BlockWAFIP
+
+With body data:
+[
+  {
+    "id": "",
+    "type": "Microsoft.SecurityInsights/Entities",
+    "kind": "Ip",
+    "properties": {
+      "address": "SOMEIP",
+      "friendlyName": "SOMEIP"
+    }
+  },
+  {
+    "id": "",
+    "type": "Microsoft.SecurityInsights/Entities",
+    "kind": "Ip",
+    "properties": {
+      "address": "SOMEIP",
+      "friendlyName": "SOMEIP"
+    }
+  }
+]
+
+-Buy a coffee on buymeacoffee.com/potsolutions
