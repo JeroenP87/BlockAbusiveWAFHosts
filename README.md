@@ -23,8 +23,7 @@ For this to work you need:
 
 query:
 
-// [Azure Front Door Standard/Premium] Top 20 blocked clients by IP and rule 
-// Show top 20 blocked clients by IP and rule name. 
+
 AzureDiagnostics
 | where ResourceProvider == "MICROSOFT.CDN"
     and Category == "FrontDoorWebApplicationFirewallLog"
@@ -35,4 +34,4 @@ AzureDiagnostics
 | order by RequestCount desc
 
 
-https://www.buymeacoffee.com/potsolutions
+www.buymeacoffee.com/potsolutions
