@@ -14,7 +14,7 @@ using System.Net.Http.Headers;
 using System.Linq;
 using System.Text;
 
-namespace BlockWAF
+namespace BlockWAFIP
 {
     public class http
     {
@@ -43,10 +43,8 @@ namespace BlockWAF
     }
 
     
-
-    public static class BlockWAFIP
+public static class BlockWAFIP
     {
-
         [FunctionName("BlockWAFIP")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
@@ -82,15 +80,9 @@ namespace BlockWAF
             var blockedIPs = currentwaf.properties.customRules.rules.FirstOrDefault(p => p.name == "BlockedIPs");
 
             var matchConditions = new List<WAF.MatchCondition>();
-            var ips = new List<string>();
+            
+            var ips = (entities.Where(entity => entity.kind.Equals("Ip")).Select(entity => entity.properties.address)).ToList();
 
-            foreach (var entity in entities)
-            {
-                if (entity.kind.Equals("Ip"))
-                {
-                    ips.Add(entity.properties.address);
-                }
-            }
             if (blockedIPs.matchConditions.FirstOrDefault().matchValue.SequenceEqual(ips))
             {
                 return new OkObjectResult("ok");
@@ -113,8 +105,6 @@ namespace BlockWAF
             return new OkObjectResult("ok");
         }
     }
-
-    
 }
 
 namespace Entitie
