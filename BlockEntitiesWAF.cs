@@ -43,7 +43,8 @@ namespace BlockWAFIP
     }
 
     
-public static class BlockWAFIP
+
+    public static class BlockWAFIP
     {
         [FunctionName("BlockWAFIP")]
         public static async Task<IActionResult> Run(
@@ -85,6 +86,7 @@ public static class BlockWAFIP
 
             if (blockedIPs.matchConditions.FirstOrDefault().matchValue.SequenceEqual(ips))
             {
+                client.Dispose();
                 return new OkObjectResult("ok");
             }
             blockedIPs.matchConditions.FirstOrDefault().matchValue = ips;
@@ -101,7 +103,7 @@ public static class BlockWAFIP
             var postresponse = await client.PutAsync("https://management.azure.com/subscriptions/" + http.azureid + "/resourceGroups/" + http.resgrp + "/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/" + http.wafpolicyname + "?api-version=2020-11-01", new StringContent(post, Encoding.UTF8, "application/json"));
 
             postresponse.EnsureSuccessStatusCode();
-
+            client.Dispose();
             return new OkObjectResult("ok");
         }
     }
