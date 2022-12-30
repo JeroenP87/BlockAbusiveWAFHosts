@@ -18,7 +18,7 @@ For this to work you need:
 
 -Buy a coffee on buymeacoffee.com/potsolutions
 
-Sentinel Analytic rule:
+-Sentinel Analytic rule:
 -run every 1 hour with data of the past 1 day
 
 query:
