@@ -9,22 +9,22 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System.Runtime.CompilerServices;
-using System.Net.NetworkInformation;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
 using System.Linq;
-using WAF;
 using System.Text;
 
-namespace MondialBlockWAF
+namespace BlockWAF
 {
     public class http
     {
         public static string secret = "";
         public static string appid = "";
         public static string tenantid = "";
+        public static string azureid = "";
+        public static string resgrp = "";
+        public static string wafpolicyname = "";
+
         public static string token { get; set; }
         public static string accessToken { get; set; }
 
@@ -33,7 +33,7 @@ namespace MondialBlockWAF
         public static async Task  GetToken()
         {
             ClientCredential credential = new ClientCredential(appid, secret);
-            AuthenticationContext authContext = new AuthenticationContext($"https://login.microsoftonline.com/" +tenantid);
+            AuthenticationContext authContext = new AuthenticationContext($"https://login.microsoftonline.com/" + tenantid);
             AuthenticationResult authResult = await authContext.AcquireTokenAsync("https://management.azure.com/", credential);
 
             // Use the access token to authenticate to Azure resources
@@ -63,7 +63,7 @@ namespace MondialBlockWAF
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", http.accessToken);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync("https://management.azure.com/subscriptions/SUBSCRIPTIONID/resourceGroups/RESOURCEGROUPNAME/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/POLICYNAME?api-version=2020-11-01");
+            HttpResponseMessage response = await client.GetAsync("https://management.azure.com/subscriptions/" + http.azureid + "/resourceGroups/" + http.resgrp + "/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/" + http.wafpolicyname + "?api-version=2020-11-01");
 
             string result = await response.Content.ReadAsStringAsync();
             var currentwaf = JsonConvert.DeserializeObject<WAF.Root>(result);
@@ -88,19 +88,17 @@ namespace MondialBlockWAF
             {
                 if (entity.kind.Equals("Ip"))
                 {
-
                     ips.Add(entity.properties.address);
                 }
             }
-
+            if (blockedIPs.matchConditions.FirstOrDefault().matchValue.SequenceEqual(ips))
+            {
+                return new OkObjectResult("ok");
+            }
             blockedIPs.matchConditions.FirstOrDefault().matchValue = ips;
 
-            var rules = new List<WAF.Rule>();
-            
-            foreach (var otherrule in otherrules)
-            {
-                rules.Add(otherrule);
-            }
+
+            var rules = (otherrules).ToList();
             rules.Add(blockedIPs);
             newwaf.properties.customRules.rules = rules;
             var post = JsonConvert.SerializeObject(newwaf, Formatting.None, new JsonSerializerSettings
@@ -108,7 +106,7 @@ namespace MondialBlockWAF
                 NullValueHandling = NullValueHandling.Ignore
             });
             var poststring = post.ToString();
-            var postresponse = await client.PutAsync("https://management.azure.com/subscriptions/SUBSCRIPTIONID/resourceGroups/RESOURCEGROUPNAME/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/POLICYNAME?api-version=2020-11-01", new StringContent(post, Encoding.UTF8, "application/json"));
+            var postresponse = await client.PutAsync("https://management.azure.com/subscriptions/" + http.azureid + "/resourceGroups/" + http.resgrp + "/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/" + http.wafpolicyname + "?api-version=2020-11-01", new StringContent(post, Encoding.UTF8, "application/json"));
 
             postresponse.EnsureSuccessStatusCode();
 
