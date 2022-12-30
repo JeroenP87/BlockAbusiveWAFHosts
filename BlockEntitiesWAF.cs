@@ -108,14 +108,11 @@ namespace MondialBlockWAF
                 NullValueHandling = NullValueHandling.Ignore
             });
             var poststring = post.ToString();
-            //poststring.Replace('"' + "priority" + '"', ' ');
             var postresponse = await client.PutAsync("https://management.azure.com/subscriptions/SUBSCRIPTIONID/resourceGroups/RESOURCEGROUPNAME/providers/Microsoft.Network/frontdoorWebApplicationFirewallPolicies/POLICYNAME?api-version=2020-11-01", new StringContent(post, Encoding.UTF8, "application/json"));
 
-            var stuff = JsonConvert.DeserializeObject(poststring);
             postresponse.EnsureSuccessStatusCode();
 
-            string responseMessage = "ok";
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult("ok");
         }
     }
 
