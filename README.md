@@ -11,7 +11,7 @@ For this to work you need:
 
 -Logic app that sends entities from the Sentinel incident to the function app.
 
--C# code running on a function plan in Azure, you can use Visual Studio Community to deploy it.
+-BlockEntitiesWAF.cs code running on a function plan in Azure, you can use Visual Studio Community to deploy it.
 
 -Application Registration with Access Rights on the WAF Policy.
 
