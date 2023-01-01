@@ -1,4 +1,4 @@
-# Block Abusive Hosts from Sentinel on Azure WAF.
+# Block Sentinel Entities on Azure WAF.
 
 
 Starting this off with a C# script that blocks IP addresses that were abusive in the last 24 hours on Azure Frontdoor. I wrote this as trying to accomplish it from a Logic App was a pain.
