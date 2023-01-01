@@ -5,13 +5,13 @@ Starting this off with a C# script that blocks IP addresses that were abusive in
 
 For this to work you need:
 
--WAF policy (Frontdoor in this example) that sends logs to Sentinel.
+-WAF policy (Frontdoor in this example).
 
 -Anaytlic rule that creates incidents with IP Entities.
 
--Logic app that sends entities from the Sentinel incident to the function app.
+-Logic app that sends entities from the Sentinel incident to the function app API.
 
--BlockEntitiesWAF.cs code running on a function plan in Azure, you can use Visual Studio Community to deploy it.
+-BlockEntitiesWAF.cs code running on a function app in Azure, you can use Visual Studio Community to deploy it.
 
 -Application Registration with Access Rights on the WAF Policy.
 
