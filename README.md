@@ -1,7 +1,6 @@
 # Block Sentinel Entities on Azure WAF.
 
-
-Starting this off with a C# script that blocks IP addresses that were abusive in the last 24 hours on Azure Frontdoor. I wrote this as trying to accomplish it from a Logic App was a pain.
+Detailed instructions on https://potsolutions.nl/2023/01/07/block-sentinel-entities-on-azure-waf/
 
 For this to work you need:
 
