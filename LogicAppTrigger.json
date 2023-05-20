@@ -1,0 +1,174 @@
+{
+    "properties": {
+        "data": {
+            "properties": {
+                "alertContext": {
+                    "properties": {
+                        "condition": {
+                            "properties": {
+                                "allOf": {
+                                    "items": {
+                                        "properties": {
+                                            "dimensions": {
+                                                "items": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name",
+                                                        "value"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "failingPeriods": {
+                                                "properties": {
+                                                    "minFailingPeriodsToAlert": {
+                                                        "type": "integer"
+                                                    },
+                                                    "numberOfEvaluationPeriods": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "linkToFilteredSearchResultsAPI": {
+                                                "type": "string"
+                                            },
+                                            "linkToFilteredSearchResultsUI": {
+                                                "type": "string"
+                                            },
+                                            "linkToSearchResultsAPI": {
+                                                "type": "string"
+                                            },
+                                            "linkToSearchResultsUI": {
+                                                "type": "string"
+                                            },
+                                            "metricMeasureColumn": {},
+                                            "metricValue": {
+                                                "type": "integer"
+                                            },
+                                            "operator": {
+                                                "type": "string"
+                                            },
+                                            "searchQuery": {
+                                                "type": "string"
+                                            },
+                                            "targetResourceTypes": {},
+                                            "threshold": {
+                                                "type": "string"
+                                            },
+                                            "timeAggregation": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "searchQuery",
+                                            "metricMeasureColumn",
+                                            "targetResourceTypes",
+                                            "operator",
+                                            "threshold",
+                                            "timeAggregation",
+                                            "dimensions",
+                                            "metricValue",
+                                            "failingPeriods",
+                                            "linkToSearchResultsUI",
+                                            "linkToFilteredSearchResultsUI",
+                                            "linkToSearchResultsAPI",
+                                            "linkToFilteredSearchResultsAPI"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "windowEndTime": {
+                                    "type": "string"
+                                },
+                                "windowSize": {
+                                    "type": "string"
+                                },
+                                "windowStartTime": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "conditionType": {
+                            "type": "string"
+                        },
+                        "properties": {
+                            "properties": {},
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "customProperties": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "essentials": {
+                    "properties": {
+                        "alertContextVersion": {
+                            "type": "string"
+                        },
+                        "alertId": {
+                            "type": "string"
+                        },
+                        "alertRule": {
+                            "type": "string"
+                        },
+                        "alertTargetIDs": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "configurationItems": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "essentialsVersion": {
+                            "type": "string"
+                        },
+                        "firedDateTime": {
+                            "type": "string"
+                        },
+                        "monitorCondition": {
+                            "type": "string"
+                        },
+                        "monitoringService": {
+                            "type": "string"
+                        },
+                        "originAlertId": {
+                            "type": "string"
+                        },
+                        "severity": {
+                            "type": "string"
+                        },
+                        "signalType": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "schemaId": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
